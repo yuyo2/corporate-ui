@@ -1,0 +1,32 @@
+{
+  "name": "corporate-ui",
+  "version": "3.0.0",
+  "description": "<h1>The Corporate UI Framework</h1>\r <p>In this repository you'll find all components described in <a href=\"https://www.scania.com/ux-library/developer\">the UX Library</a>.</p>\r <p>The repository is a place for all Front End Developers to join the UI Developement at Scania. It is us togheter that develop and maintain this repository.</p> \r <ul>\r \t<li>Something broken in a existing component? Help fixing it!</li>\r \t<li>Found a component that needs to be extended? Get on and improve it!</li>\r \t<li>Missing out on a component? Develop it!</li>\r </ul>",
+  "scripts": {
+    "preinstall": "npm i -g less typescript && npm i webpack webpack-dev-server webpack-dev-middleware",
+    "start": "npm run global",
+    "global": "npm run global:css & npm run global:js",
+    "global:css": "scss src/global/main.scss dist/%npm_package_name%.css",
+    "global:js": "webpack-dev-server --content-base dist/ --env.name=%npm_package_name%",
+    "brands": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.scania.com:Scania/corporate-ui.git"
+  },
+  "keywords": [
+    "webcomponents",
+    "bootstrap",
+    "polymer",
+    "angular"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "webpack": "^3.8.1",
+    "webpack-dev-middleware": "^1.12.2",
+    "webpack-dev-server": "^2.9.5"
+  }
+}
