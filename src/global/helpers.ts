@@ -1,10 +1,10 @@
 
 export class CustomHTMLElement extends HTMLElement {
 
-  constructor(properties, template) {
+  constructor({properties={}, template}) {
     super()
-    this['properties'] = properties;
-    this['template'] = template;
+    this['properties'] = properties
+    this['template'] = template
   }
 
   setProps() {
