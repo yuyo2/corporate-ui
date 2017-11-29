@@ -1,16 +1,19 @@
 
-export default class CorporateFooter extends HTMLElement {
+import { CustomHTMLElement } from '../helpers'
+
+export default class CorporateFooter extends CustomHTMLElement {
 
   constructor() {
-    super();
-  }
-
-  connectedCallback(){
-    this.innerHTML = `
-      <footer>
-        <address>Some address can be added here</address>
-      </footer>
-      `;
+    super(
+      {},
+      function() {
+        return `
+          <footer>
+            <address>Some address can be added here</address>
+          </footer>
+          `
+      }
+    )
   }
 
 }

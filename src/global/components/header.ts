@@ -1,24 +1,25 @@
 
-export default class CorporateHeader extends HTMLElement {
+import { CustomHTMLElement } from '../helpers'
+
+export default class CorporateHeader extends CustomHTMLElement {
 
   constructor() {
-    super();
+    super(
+      {
+        siteName: {
+          type: String,
+          value: 'Title'
+        }
+      },
+      function() {
+        return `
+          <style>:host { display: block; background: red; }</style>
+          <header>
+            <img src="" alt="${this.siteName}">
+          </header>
+          `
+      }
+    )
   }
-
-  connectedCallback() {
-    this.innerHTML = `
-      <style>:host { background: red; }</style>
-      <header>
-        <img src="" alt="logotype">
-      </header>
-      `;
-
-    var name = this.nodeName.toLowerCase();
-    var root = this['createShadowRoot']();
-    var node = document.querySelector(name);
-    root.appendChild(node['content']);
-  }
-  disconnectedCallback() { }
-  attributeChangedCallback(attr, oldVal, newVal) {  }
 
 }
