@@ -1,0 +1,13 @@
+@import '../../global/scss/mixins';
+
+corporate-footer {
+  display: block;
+
+  .navbar {
+    @include dark();
+  }
+
+  > .navbar {
+    flex-direction: column-reverse;
+  }
+}

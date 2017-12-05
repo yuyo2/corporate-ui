@@ -1,0 +1,8 @@
+{
+  "name": "Corporate UI",
+  "short_name": "CUI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#16161d",
+  "theme_color": "#16161d"
+}

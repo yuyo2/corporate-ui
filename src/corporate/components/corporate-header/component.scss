@@ -1,0 +1,9 @@
+@import '../../global/scss/mixins';
+
+corporate-header {
+  display: block;
+
+  .navbar {
+    @include dark();
+  }
+}

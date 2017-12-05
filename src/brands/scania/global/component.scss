@@ -1,0 +1,42 @@
+@import '../../../corporate/global/scss/mixins';
+
+// body would not be needed if brand related things are loaded after corporate related things
+.scania {
+
+  @import 'scss/navigation';
+
+  corporate-header {
+
+    .navbar {
+      @include navigation();
+    }
+  }
+
+  main-navigation {
+
+    .navbar {
+      background-color: #fff;
+      padding: 0;
+
+      .nav-item {
+
+        .nav-link {
+          padding: 20px 0;
+
+          &:before,
+          &:after {
+            content: "";
+            padding: 0 15px;
+          }
+        }
+
+        + .nav-item .nav-link{
+
+          &:before {
+            border-left: 1px solid #e2e2e2;
+          }
+        }
+      }
+    }
+  }
+}

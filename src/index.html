@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stencil Starter App</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#16161d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <script src="/build/app.js"></script>
+
+  <link rel="apple-touch-icon" href="/assets/icon/icon.png">
+  <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+  <!-- Initialize Corporate-ui -->
+  <corporate-ui></corporate-ui>
+
+  <corporate-header>
+    <li slot="items" class="nav-item"><a href="" class="nav-link">About</a></li>
+  </corporate-header>
+
+  <!-- <scania-header></scania-header> -->
+
+  <main>
+    <main-navigation></main-navigation>
+
+    <section>
+      <img src="http://www.kudauk.ltd.uk/content/images/1900x285/Lightbar_Banner-01_2.jpg" alt="Hero image" class="w-100">
+    </section>
+
+    <section>
+      <scania-panel class="container">
+        <h2 slot="header">Headline</h2>
+        <p slot="main">Paragraph</p>
+        <button slot="footer">primary</button>
+        <button slot="footer">cancel</button>
+      </scania-panel>
+    </section>
+
+    <section>
+      <div class="container pt-5 pb-5">
+        <div class="row">
+          <div class="col-sm">
+            <img src="https://static.scania.com/resources/images/demo/sneaky-road.jpg" alt="Hero image" class="w-100">
+          </div>
+          <div class="col-sm">
+            <h1>Sustainability</h1>
+            <p>By leveraging customer profitability as our starting point, we want to be the leading provider of sustainable transport. This means integrating sustainability fully into the business and working with others to tackle impacts, transform our industry and create lasting value.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <corporate-footer></corporate-footer>
+
+  <script>
+    /* External application code */
+    (function() {
+      /* NOTE - If you have a pre set attribute and you want to change its value.
+      You will have to do this by setting attribute else simply set target prop */
+
+      var el1 = document.querySelector('corporate-ui')
+      el1.brand = 'scania'
+
+      var el2 = document.querySelector('corporate-header')
+      el2.siteName = 'Corporate UI'
+      el2.items = [{name: 'Global'}]
+
+      var el3 = document.querySelector('main-navigation')
+      el3.items = [{name: 'Home'}, {name: 'Link'}]
+    })()
+  </script>
+</body>
+</html>

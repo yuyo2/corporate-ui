@@ -1,0 +1,7 @@
+@import '../../../../corporate/global/scss/mixins';
+@import './mixins';
+
+// Styles for when used outside of a custom-element
+> .navbar:first-child {
+  @include navigation();
+}

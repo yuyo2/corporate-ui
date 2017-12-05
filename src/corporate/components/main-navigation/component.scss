@@ -1,0 +1,9 @@
+@import '../../global/scss/mixins';
+
+main-navigation {
+  display: block;
+
+  .navbar {
+    @include light();
+  }
+}

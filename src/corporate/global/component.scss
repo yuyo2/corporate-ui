@@ -1,0 +1,27 @@
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+corporate-ui {
+  display: none;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  > main {
+    flex: 1;
+
+    > section {
+      background-color: #fff;
+
+      &:nth-child(even) {
+        background-color: #eee;
+      }
+      &:nth-child(odd) {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+    }
+  }
+}

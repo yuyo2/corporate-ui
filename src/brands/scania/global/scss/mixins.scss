@@ -1,0 +1,34 @@
+@mixin navigation() {
+  @include light();
+
+  background-color: #fff;
+  padding: 12px 15px 3px;
+  border-bottom: 1px solid #e2e2e2;
+
+  .navbar-brand {
+    background-image: url(https://static.scania.com/resources/logotype/scania/scania-wordmark.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: middle;
+    width: 170px;
+    height: 28px;
+    margin: 20px 30px 20px 15px;
+    text-indent: 200px;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &:after {
+      content: "";
+      display: block;
+      border-right: 1px solid #e2e2e2;
+      position: absolute;
+      right: -16px;
+      top: 4px;
+      bottom: 4px;
+    }
+  }
+  > .navbar-collapse {
+    position: relative; // position this element on top of brand, making app name non clickable
+  }
+}
