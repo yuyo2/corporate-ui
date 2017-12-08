@@ -1,14 +1,16 @@
 {
-  "name": "@stencil/starter",
+  "name": "Corporate-UI",
+  "description": "A component and design library, supporting global and sub project",
+  "version": "4.0.0",
   "private": true,
-  "version": "0.0.1",
-  "description": "Stencil App Starter",
   "files": [
     "dist/"
   ],
   "scripts": {
+    "preinstall": "npm i -g http-server",
     "build": "stencil build --prerender",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "doc": "node_modules\\.bin\\typedoc --hideGenerator --mode file --out doc/ src/ & http-server doc/",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
@@ -23,7 +25,8 @@
     "@stencil/dev-server": "latest",
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "typedoc": "^0.9.0"
   },
   "repository": {
     "type": "git",

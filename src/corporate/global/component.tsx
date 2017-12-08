@@ -1,8 +1,6 @@
 import { Component, Prop, PropWillChange } from '@stencil/core';
-// import BrandScania from '../../brands/scania/global/component';
-// import CorporateHeader from '../components/corporate-header/component';
 
-@Component({
+Component({
   tag: 'corporate-ui',
   styleUrl: 'component.scss'
 })
@@ -10,12 +8,12 @@ export class CorporateUi {
 
   @Prop() brand: string;
 
+  tag: string;
+
   @PropWillChange('brand')
   willChangeHandler() {
     document.body.classList.remove(this.brand)
   }
-
-  tag: string
 
   render() {
     document.body.classList.add(this.brand)
