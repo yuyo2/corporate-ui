@@ -3,7 +3,11 @@ exports.config = {
     { components: ['corporate-ui'] },
     { components: ['scania-ui'] }
   ],
-  srcDir: 'src'
+  srcDir: 'src',
+  copy: [
+    { src: 'angular.html' },
+    { src: '../node_modules/angular/angular.js', dest: 'libs/angular.js' }
+  ]
   /*collections: [
     { name: '@stencil/router' }
   ]*/

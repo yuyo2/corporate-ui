@@ -10,7 +10,7 @@
     "preinstall": "npm i -g http-server",
     "build": "stencil build --prerender",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
-    "doc": "node_modules\\.bin\\typedoc --hideGenerator --mode file --out doc/ src/ & http-server doc/",
+    "doc": "node_modules\\.bin\\typedoc --hideGenerator --theme node_modules/typedoc-dash-theme/bin --mode file --out doc/ src/ & http-server doc/",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest --no-cache",
@@ -19,7 +19,10 @@
   "dependencies": {
     "@stencil/core": "0.0.6",
     "@stencil/router": "latest",
-    "bootstrap": "^4.0.0-beta.2"
+    "angular": "^1.4.4",
+    "bootstrap": "^4.0.0-beta.2",
+    "typedoc-clarity-theme": "^1.1.0",
+    "typedoc-dash-theme": "^1.1.0"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",

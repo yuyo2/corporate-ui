@@ -8,24 +8,26 @@
   <meta name="theme-color" content="#16161d">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <script src="/libs/angular.js"></script>
   <script src="/build/app.js"></script>
 
   <link rel="apple-touch-icon" href="/assets/icon/icon.png">
   <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico">
   <link rel="manifest" href="/manifest.json">
 </head>
-<body>
+<body ng-app="CorporateUi" ng-controller="App as app">
   <!-- Initialize Corporate-ui -->
-  <corporate-ui></corporate-ui>
+  <corporate-ui brand="{{app.brand}}"></corporate-ui>
 
-  <corporate-header>
+  <corporate-header site-name="{{app.siteName}}" ng-attr-items="{{app.topItems}}">
     <li slot="items" class="nav-item"><a href="" class="nav-link">About</a></li>
+    <li slot="items" class="nav-item" ng-repeat="item in main.items"><a href="" class="nav-link">{{item.name}}</a></li>
   </corporate-header>
 
   <!-- <scania-header></scania-header> -->
 
   <main>
-    <main-navigation></main-navigation>
+    <main-navigation ng-items="{{app.mainItems}}"></main-navigation>
 
     <section>
       <img src="http://www.kudauk.ltd.uk/content/images/1900x285/Lightbar_Banner-01_2.jpg" alt="Hero image" class="w-100">
@@ -60,18 +62,48 @@
   <script>
     /* External application code */
     (function() {
-      /* NOTE - If you have a pre set attribute and you want to change its value.
-      You will have to do this by setting attribute else simply set target prop */
+      /* NOTE - We would like to use ng-attr-items instead and have a callback that setts
+      props on element to attribute value */
 
-      var el1 = document.querySelector('corporate-ui')
-      el1.brand = 'scania'
+      angular.module('CorporateUi', []);
 
-      var el2 = document.querySelector('corporate-header')
-      el2.siteName = 'Corporate UI'
-      el2.items = [{name: 'Global'}]
+      angular.module('CorporateUi')
+        .config(Config)
+        .controller('App', ['$scope', App])
+        .directive('ngItems', ngItems);
 
-      var el3 = document.querySelector('main-navigation')
-      el3.items = [{name: 'Home'}, {name: 'Link'}]
+      function Config($provide) {
+
+        debugger
+        /*$provide.decorator('ngAttrDirective', function($delegate) {
+          var directive = $delegate[0];
+          angular.extend(directive.scope, {
+            disabled:'@'
+          });
+          return $delegate;
+        });*/
+
+        /*$provide.service('interpolate', function(asdas, dfgdfg) {
+          debugger
+          //return $delegate;
+        });*/
+      }
+
+      function App($scope) {
+        var vm = this;
+        vm.brand = 'scania';
+        vm.siteName = 'Corporate UI';
+        vm.topItems = [{name: 'Global'}];
+        vm.mainItems = [{name: 'Home'}, {name: 'Link'}];
+      }
+
+      function ngItems() {
+        return {
+          link: function(scope, element, attr) {
+            element[0].items = JSON.parse( attr.ngItems || [] );
+          }
+        };
+      }
     })()
   </script>
 </body>

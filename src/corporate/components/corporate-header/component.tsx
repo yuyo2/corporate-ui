@@ -8,12 +8,20 @@ export class CorporateHeader {
 
   @Prop() siteName: string = 'Site name';
 
-  @Prop() items: any[] = [];
+  @Prop({ mutable: true }) items: any[] = [];
 
   render() {
     // This was added to provide a solution for re defining prop type for props having type string instead of intended type
     // Can be used for example, when manually setting a custom element property in index.html as an array ex: items='[{"name": "global"}]'
-    // this.items = typeof this.items === 'object' ? this.items : JSON.parse( new Function('self', 'return self.items')(this) );
+    /*if (this.__el.getAttribute('items').indexOf('{{') > -1) {
+      let newItems = JSON.parse( new Function('self', 'return self.__el.getAttribute("items")')(this) || [] );
+      if (JSON.stringify(newItems) !== JSON.stringify(this.items)) {
+        this.items = newItems;
+      }
+    }*/
+    /*if (!this.items.length === 0) {
+      this.items = JSON.parse( new Function('self', 'return self.__el.getAttribute("items")')(this) || [] );
+    }*/
     return (
       <nav class="navbar navbar-expand-md">
         <a class="navbar-brand" href="#">{this.siteName}</a>

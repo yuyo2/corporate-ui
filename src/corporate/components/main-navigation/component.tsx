@@ -6,7 +6,7 @@ import { Component, Prop } from '@stencil/core';
 })
 export class MainNavigation {
 
-  @Prop({ mutable: true }) items: any[] = [];
+  @Prop() items: any[] = [];
 
   render() {
     // This was added to provide a solution for re defining prop type for props having type string instead of intended type
