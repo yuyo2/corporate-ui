@@ -16,6 +16,10 @@ export class CorporateUi {
   }
 
   render() {
+    if (!this.brand) {
+      return;
+    }
+
     document.body.classList.add(this.brand)
     this.tag = this.brand.indexOf('{{') < 0 ? this.brand + '-ui' : undefined;
     return (

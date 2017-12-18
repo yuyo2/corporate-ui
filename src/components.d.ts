@@ -214,3 +214,62 @@ declare global {
   }
 }
 
+import { VehicalMap as VehicalMap } from './projects/fmp/components/vehical-map/component';
+
+interface HTMLVehicalMapElement extends VehicalMap, HTMLElement {
+}
+declare var HTMLVehicalMapElement: {
+  prototype: HTMLVehicalMapElement;
+  new (): HTMLVehicalMapElement;
+};
+declare global {
+  interface HTMLElementTagNameMap {
+      "vehical-map": HTMLVehicalMapElement;
+  }
+  interface ElementTagNameMap {
+      "vehical-map": HTMLVehicalMapElement;
+  }
+  namespace JSX {
+      interface IntrinsicElements {
+          "vehical-map": JSXElements.VehicalMapAttributes;
+      }
+  }
+  namespace JSXElements {
+      export interface VehicalMapAttributes extends HTMLAttributes {
+          mode?: string,
+          color?: string,
+        
+          cords?: any
+      }
+  }
+}
+
+import { FmpUi as FmpUi } from './projects/fmp/global/component';
+
+interface HTMLFmpUiElement extends FmpUi, HTMLElement {
+}
+declare var HTMLFmpUiElement: {
+  prototype: HTMLFmpUiElement;
+  new (): HTMLFmpUiElement;
+};
+declare global {
+  interface HTMLElementTagNameMap {
+      "fmp-ui": HTMLFmpUiElement;
+  }
+  interface ElementTagNameMap {
+      "fmp-ui": HTMLFmpUiElement;
+  }
+  namespace JSX {
+      interface IntrinsicElements {
+          "fmp-ui": JSXElements.FmpUiAttributes;
+      }
+  }
+  namespace JSXElements {
+      export interface FmpUiAttributes extends HTMLAttributes {
+          mode?: string,
+          color?: string,
+        
+      }
+  }
+}
+

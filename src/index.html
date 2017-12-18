@@ -18,37 +18,32 @@
   <!-- Initialize Corporate-ui -->
   <corporate-ui></corporate-ui>
 
-  <corporate-header>
-    <li slot="items" class="nav-item"><a href="" class="nav-link">About</a></li>
-  </corporate-header>
-
-  <!-- <scania-header></scania-header> -->
+  <corporate-header site-name="Corporate Library"></corporate-header>
 
   <main>
-    <main-navigation></main-navigation>
-
     <section>
-      <img src="http://www.kudauk.ltd.uk/content/images/1900x285/Lightbar_Banner-01_2.jpg" alt="Hero image" class="w-100">
-    </section>
-
-    <section>
-      <scania-panel class="container">
-        <h2 slot="header">Headline</h2>
-        <p slot="main">Paragraph</p>
-        <button slot="footer">primary</button>
-        <button slot="footer">cancel</button>
-      </scania-panel>
-    </section>
-
-    <section>
-      <div class="container pt-5 pb-5">
-        <div class="row">
+      <div class="container">
+        <div class="row justify-content-center mb-3">
+          <div class="col-sm-6">
+            <h1>
+              Corporate Library<br />
+              <small>For the components and patterns</small>
+            </h1>
+            <p>A component and design library, supporting global, brands and projects</p>
+          </div>
+        </div>
+        <div class="row text-center">
           <div class="col-sm">
-            <img src="https://static.scania.com/resources/images/demo/sneaky-road.jpg" alt="Hero image" class="w-100">
+            <a href="demo/">
+              <h2>Demo</h2>
+              <img src="https://scania.github.io/corporate-ui/images/scania-bootstrap.svg">
+            </a>
           </div>
           <div class="col-sm">
-            <h1>Sustainability</h1>
-            <p>By leveraging customer profitability as our starting point, we want to be the leading provider of sustainable transport. This means integrating sustainability fully into the business and working with others to tackle impacts, transform our industry and create lasting value.</p>
+            <a href="doc/">
+              <h2>Doc</h2>
+              <img src="https://scania.github.io/corporate-ui/images/adobe-experience-manager.svg">
+            </a>
           </div>
         </div>
       </div>
@@ -56,23 +51,5 @@
   </main>
 
   <corporate-footer></corporate-footer>
-
-  <script>
-    /* External application code */
-    (function() {
-      /* NOTE - If you have a pre set attribute and you want to change its value.
-      You will have to do this by setting attribute else simply set target prop */
-
-      var el1 = document.querySelector('corporate-ui')
-      el1.brand = 'scania'
-
-      var el2 = document.querySelector('corporate-header')
-      el2.siteName = 'Corporate UI'
-      el2.items = [{name: 'Global'}]
-
-      var el3 = document.querySelector('main-navigation')
-      el3.items = [{name: 'Home'}, {name: 'Link'}]
-    })()
-  </script>
 </body>
 </html>

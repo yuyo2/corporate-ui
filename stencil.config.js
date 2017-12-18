@@ -5,7 +5,7 @@ exports.config = {
   ],
   srcDir: 'src',
   copy: [
-    { src: 'angular.html' },
+    { src: 'demo' },
     { src: '../node_modules/angular/angular.js', dest: 'libs/angular.js' }
   ]
   /*collections: [

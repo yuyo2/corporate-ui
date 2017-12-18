@@ -64,30 +64,11 @@
     (function() {
       /* NOTE - We would like to use ng-attr-items instead and have a callback that setts
       props on element to attribute value */
-
       angular.module('CorporateUi', []);
 
       angular.module('CorporateUi')
-        .config(Config)
         .controller('App', ['$scope', App])
         .directive('ngItems', ngItems);
-
-      function Config($provide) {
-
-        debugger
-        /*$provide.decorator('ngAttrDirective', function($delegate) {
-          var directive = $delegate[0];
-          angular.extend(directive.scope, {
-            disabled:'@'
-          });
-          return $delegate;
-        });*/
-
-        /*$provide.service('interpolate', function(asdas, dfgdfg) {
-          debugger
-          //return $delegate;
-        });*/
-      }
 
       function App($scope) {
         var vm = this;

@@ -10,7 +10,7 @@ body {
   flex-direction: column;
 
   > main {
-    flex: 1;
+    flex-grow: 1;
 
     > section {
       background-color: #fff;
