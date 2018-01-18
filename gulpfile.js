@@ -7,6 +7,7 @@ var fs = require('fs'),
     jade = require('gulp-jade'),
     typescript = require('gulp-typescript'),
     sourcemaps = require('gulp-sourcemaps'),
+    scssToLess = require('gulp-scss-to-less'),
     rename = require('gulp-rename'),
     data = require('gulp-data'),
     merge = require('merge-stream'),
@@ -29,19 +30,29 @@ gulp.watch('src/less/**/*', gulp.series(['less']))
 gulp.watch('src/views/component/**/*', gulp.series(['component']))
 
 /* Methods */
+function cleanComponent() {
+  return gulp.src('tmp', {read: false})
+    .pipe(clean())
+}
 function _clean() {
   return gulp.src('{dist,tmp}', {read: false})
     .pipe(clean())
 }
 function _symlink() {
   var stream1 = gulp.src('src/{images,js,less,starter-kit}')
-    .pipe(gulp.symlink('dist'));
+    .pipe(gulp.symlink('dist'))
   var stream2 = gulp.src('src/views/template')
     .pipe(gulp.symlink('dist/html'))
-  return merge(stream1, stream2)  
+  return merge(stream1, stream2)
 }
 function _less() {
-  return gulp.src(['src/less/*.less', 'src/less/corporate-ui/{core,fonts,icons,brands}.less'])
+  var stream1 = gulp.src('node_modules/brand-colours/colours.scss')
+    .pipe(scssToLess())
+    .pipe(rename(function(path) {
+      path.extname = ".less";
+    }))
+    .pipe(gulp.dest('tmp/less'))
+  var stream2 = gulp.src(['src/less/*.less', 'src/less/corporate-ui/{core,fonts,icons,brands}.less'])
     .pipe(sourcemaps.init())
     .pipe(less({
       globalVars: {
@@ -50,10 +61,7 @@ function _less() {
     }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist/css'))
-}
-function cleanComponent() {
-  return gulp.src('tmp', {read: false})
-    .pipe(clean())
+  return merge(stream1, stream2)
 }
 function _lessComponent() {
   return gulp.src('src/views/component/**/*.less')
