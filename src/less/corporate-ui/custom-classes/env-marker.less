@@ -24,21 +24,25 @@ body[data-env=proto]:before,
 body[data-env=development]:before,
 body[data-env^=beta]:before {
   background-color: @color-secondary-03;
+  background-color: var(--color-secondary-03);
   color: #fff;
 }
 
 body[data-env=sys]:before {
   background-color: @color-secondary-04;
+  background-color: var(--color-secondary-04);
   color: #fff;
 }
 
 body[data-env=acc]:before,
 body[data-env=pre]:before {
   background-color: @color-secondary-02;
+  background-color: var(--color-secondary-02);
   color: #fff;
 }
 body[data-env^="2"]:before {
   background-color: @interaction-primary;
+  background-color: var(--interaction-primary);
   color: #fff;
 }
 

@@ -210,16 +210,21 @@ ul.nav-tabs {
       border-radius: 0;
       margin-right: 0;
       border-top: 1px solid @color-primary-01;
+      border-top-color: var(--color-primary-01);
       border-right: 1px solid @color-primary-01;
+      border-right-color: var(--color-primary-01);
       background-color: #fff;
       color: @color-primary-03;
+      color: var(--color-primary-03);
       font-size: 1.4rem;
       text-transform: uppercase;
 
       &:hover {
         background-color: #f7f7f7;
         border-top: 1px solid @color-primary-01;
+        border-top-color: var(--color-primary-01);
         border-right: 1px solid @color-primary-01;
+        border-right-color: var(--color-primary-01);
       }
     }
 
@@ -231,15 +236,19 @@ ul.nav-tabs {
         position: relative;
         color: #fff;
         background-color: @color-primary-03;
+        background-color: var(--color-primary-03);
         border-radius: 0;
         border-top: 1px solid @color-primary-03;
+        border-top-color: var(--color-primary-03);
         border-left: 1px solid @color-primary-03;
+        border-left-color: var(--color-primary-03);
       }
     }
 
     &:first-child a,
     &.active:first-child a {
       border-left: 1px solid @color-primary-01;
+      border-left-color: var(--color-primary-01);
     }
 
     &.disabled a {
@@ -273,6 +282,7 @@ ul.nav-tabs {
           padding: 0;
           margin: 15px 16px 13px;
           border-color: @color-brand-03;
+          border-color: var(--color-brand-03);
           border-width: 0 0 2px;
           font-family: 'Scania Sans Bold';
         }
@@ -301,16 +311,19 @@ ul.nav-tabs {
       &:hover,
       &:focus {
         background-color: @interaction-info;
+        background-color: var(--interaction-info);
         color: #fff;
       }
 
       > .badge {
         color: @interaction-info;
+        color: var(--interaction-info);
       }
     }
 
     > a {
       color: @interaction-info;
+      color: var(--interaction-info);
     }
   }
 
@@ -333,10 +346,12 @@ ul.nav-tabs {
 
     li {
       border: 1px solid @interaction-info;
+      border-color: var(--interaction-info);
       background-color: #fff;
 
       &.active {
         background-color: @interaction-info;
+        background-color: var(--interaction-info);
       }
     }
 
@@ -377,6 +392,7 @@ ul.nav-tabs {
 
       li.active {
         border-color: @interaction-info;
+        border-color: var(--interaction-info);
       }
     }
   }
