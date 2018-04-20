@@ -17,8 +17,8 @@ Polymer({
     'fullscreen-toggled': 'setHeaderSize'
   },
   done: function() {
-    this.jQuery('primary-items, secondary-items', this).addClass('nav navbar-nav');
-    this.jQuery('secondary-items', this).addClass('navbar-right');
+    $('primary-items, secondary-items', this).addClass('nav navbar-nav');
+    $('secondary-items', this).addClass('navbar-right');
 
     // The timeout here is used to delay the callback until template is fully rendered
     setTimeout((function() {
@@ -31,7 +31,7 @@ Polymer({
     this.style.display = 'block';
 
     $('#main-navigation', this).on('show.bs.collapse hidden.bs.collapse', function() {
-      self.jQuery('body').toggleClass('navigation-open');
+      $('body').toggleClass('navigation-open');
     });
 
     this.header = document.querySelector('c-corporate-header');
@@ -60,37 +60,37 @@ Polymer({
     this.done.call(this);
   },
   setItemActive: function(event) {
-    if(window.innerWidth < 991 && event.target.active == 'true' && this.jQuery(event.target).parents('sub-navigation').length) {
-      this.jQuery('#main-navigation', this).collapse('hide');
+    if(window.innerWidth < 991 && event.target.active == 'true' && $(event.target).parents('sub-navigation').length) {
+      $('#main-navigation', this).collapse('hide');
     }
-    // this.jQuery('.navbar-toggle').trigger('click');
+    // $('.navbar-toggle').trigger('click');
     this.setHeaderSize.call(this);
   },
   setHeaderSize: function() {
-    var headerHeight = this.jQuery('.navbar-toggle:visible', this.header).height()
-                     || this.jQuery('> nav', this).height() + this.jQuery('sub-navigation:visible', this).height()
+    var headerHeight = $('.navbar-toggle:visible', this.header).height()
+                     || $('> nav', this).height() + $('sub-navigation:visible', this).height()
                      || 'auto'; // On desktop mode it will use #main-nav on mobile .navbar-toggle
 
     if( parseInt(this.style.height) != headerHeight ) {
-      this.jQuery(this)
+      $(this)
         .removeAttr('style')
         .css({display: 'block'})
         .height( headerHeight );
     }
 
-    this.jQuery('> .navbar-default', this).removeAttr('style');
+    $('> .navbar-default', this).removeAttr('style');
 
     // Used in mobile mode
     if(window.innerWidth < 991) {
-      var header = this.jQuery(this.header).height();
-      this.jQuery('> .navbar-default', this).css({ 'padding-top': header });
+      var header = $(this.header).height();
+      $('> .navbar-default', this).css({ 'padding-top': header });
     }
   },
   sticky: function() {
-    var body = this.jQuery('body'),
-        navContainer = this.jQuery('> .navbar-default', this), // Using > could lead to performance issues due to manipulation of dom
-        stickyNavTop = this.jQuery(this).offset().top,
-        scrollTop = this.jQuery(window).scrollTop(); // our current vertical position from the top
+    var body = $('body'),
+        navContainer = $('> .navbar-default', this), // Using > could lead to performance issues due to manipulation of dom
+        stickyNavTop = $(this).offset().top,
+        scrollTop = $(window).scrollTop(); // our current vertical position from the top
 
     if (scrollTop <= Math.max(stickyNavTop, 0)) {
       body.removeClass('header-is-sticky');

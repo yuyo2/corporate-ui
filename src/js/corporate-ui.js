@@ -26,13 +26,13 @@ window.CorporateUi = (function() {
   
   function init() {
 
-    addMetaAndHeaderSpecs();
+    //addMetaAndHeaderSpecs();
 
     AppEventStore = new EventStore();
 
     setGlobals();
 
-    appendExternals();
+    //appendExternals();
   }
   
   function done(event) {
@@ -52,7 +52,6 @@ window.CorporateUi = (function() {
     newEvent.initEvent('CorporateUiLoaded', true, true);
     document.dispatchEvent(newEvent);
 
-    sysMessages();
   }
 
   function EventStore() {
@@ -221,7 +220,7 @@ window.CorporateUi = (function() {
 
   function applyBrand() {
 
-    var brands = ['vw-group', 'audi', 'ducati', 'lamborghini', 'seat', 'volkswagen', 'bentley', 'skoda', 'bugatti', 'porsche', 'scania', 'man', 'spotify'];
+    var brands = ['vw-group', 'audi', 'ducati', 'lamborghini', 'seat', 'volkswagen', 'bentley', 'skoda', 'bugatti', 'porsche', 'scania', 'man', 'vw-truck-bus'];
     var subDomain = window.location.hostname.split('.')[0];
     var brand = brands.indexOf( subDomain ) > -1 ? subDomain : 'scania';
 
@@ -406,43 +405,11 @@ window.CorporateUi = (function() {
       public.components['main-navigation']
     ];
 
-    // Adds support for webcomponents if non exist
-    if (!('import' in document.createElement('link'))) {
-      importScript(window.static_root + '/vendors/frameworks/webcomponents.js/0.7.24/webcomponents-lite.min.js', null, window.corporate_elm);
-    }
-
-    if (window.params.polymer !== 'false') {
-      //importLink('/vendors/frameworks/@polymer/polymer/2.0.0/polymer.html', 'import');
-      importLink(window.static_root + '/vendors/frameworks/polymer/1.4.0/polymer.html', 'import', polymerInject, window.corporate_elm);
-    }
-
-    if (window.params.css !== 'custom') {
-      importLink(window.static_root + '/vendors/frameworks/bootstrap/3.2.0/dist/css/bootstrap-org.css', 'stylesheet', null, window.corporate_elm);
-      importLink(window.version_root + 'css/corporate-ui.css', 'stylesheet', null, window.corporate_elm);
-    }
-
     // Adds support for Promise if non exist
     if (typeof(Promise) === 'undefined') {
-      importScript(window.static_root + '/vendors/components/pure-js/es6-promise/4.1.0/dist/es6-promise.js', function() {
-        Promise = ES6Promise;
-        baseComponents(window.params.preload === 'false' ? [] : undefined);
-      }, window.corporate_elm);
-    } else {
-      baseComponents(window.params.preload === 'false' ? [] : undefined);
+      Promise = ES6Promise;
     }
-  }
+    baseComponents(window.params.preload === 'false' ? [] : undefined);
 
-  function sysMessages() {
-    if (window.protocol === 'http:') {
-      console.warn('You are pointing to corporate-ui using "HTTP" protocol and its not supported please change to "HTTPS".');
-    }
-
-    if (window.environment === 'development') {
-      console.warn('Remeber that you are pointing to our development environment and due to this you might experience some techical difficulties.');
-    }
-
-    if (window.ready_event === 'timeout') {
-      console.warn('"WebComponentsReady" have not yet been triggered (10sec). Fallback has been initialized.');
-    }
   }
 }());
