@@ -3,38 +3,24 @@ window.CorporateUi = (function() {
 
   /*** Public proporties ***/
   var public = {
-
     /* Public methods */
-    getUrlParameter : getUrlParameter,
-    indexOf         : indexOf,
-    createCookie    : createCookie,
-    readCookie      : readCookie,
-    eraseCookie     : eraseCookie,
     importScript    : importScript,
     importLink      : importLink,
     generateMeta    : generateMeta,
-    urlInfo         : urlInfo,
-    baseComponents  : baseComponents,
-    EventStore      : EventStore,
-    components      : {},
+    urlInfo         : urlInfo
   };
 
   /*** This starts everything ***/
   init();
 
   return public;
-  
+
   function init() {
-
-    //addMetaAndHeaderSpecs();
-
-    AppEventStore = new EventStore();
-
     setGlobals();
-
-    //appendExternals();
+    polymerInject();
+    done();
   }
-  
+
   function done(event) {
     if (window.ready_event) {
       return;
@@ -42,102 +28,12 @@ window.CorporateUi = (function() {
 
     window.ready_event = event ? 'load' : 'timeout'; // Timeout have no params sent so it will be undefined
 
-    clearTimeout(window.fallback);
-
-    document.documentElement.className = document.documentElement.className.replace(/\bloading\b/, '');
-
     document.addEventListener("DOMContentLoaded", applyBrand);
 
     var newEvent = document.createEvent('Event');
     newEvent.initEvent('CorporateUiLoaded', true, true);
     document.dispatchEvent(newEvent);
 
-  }
-
-  function EventStore() {
-    this.store = {};
-    this.apply = apply;
-    //this.__proto__.revert = revert;
-
-    function apply(event) {
-      this.store[event.name] = this.store[event.name] || [];
-      event.id = this.store[event.name].length + 1; // Just for testing
-      this.store[event.name].push(event);
-      dispatch(event);
-    }
-    /*function revert(event) {
-      var prevEvent = this.store[event.name].filter(function(item) { return item.id === event.id })[0];
-      this.apply(prevEvent);
-    }*/
-    function dispatch(event) {
-      var newEvent = document.createEvent('Event');
-      newEvent.initEvent(event.action, true, true);
-      newEvent.data = event.data;
-      document.dispatchEvent(newEvent);
-    }
-  }
-
-  // Taken from: http://stackoverflow.com/a/979997
-  function getUrlParameter(name) {
-    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-
-    var regexS = "[\\?&]" + name + "=([^&#]*)",
-        regex = new RegExp(regexS),
-        results = regex.exec(window.location.href);
-
-    if (results == null) {
-      return results;
-    } else {
-      return results[1];
-    }
-  }
-
-  // Taken from: http://stackoverflow.com/a/1181586
-  function indexOf(needle) {
-    if(typeof Array.prototype.indexOf === 'function') {
-      indexOf = Array.prototype.indexOf;
-    } else {
-      indexOf = function(needle) {
-        var i = -1, index = -1;
-
-        for(i = 0; i < this.length; i++) {
-          if(this[i] === needle) {
-            index = i;
-            break;
-          }
-        }
-        return index;
-      };
-    }
-    return indexOf.call(this, needle);
-  }
-
-  // Cookie related functions taken from: http://stackoverflow.com/a/24103596
-  function createCookie(name, value, days) {
-    if (days) {
-      var date = new Date();
-
-      date.setTime(date.getTime()+(days*24*60*60*1000));
-      var expires = "; expires="+date.toGMTString();
-    }
-    else var expires = "";
-    document.cookie = name+"="+value+expires+"; path=/";
-  }
-
-  function readCookie(name) {
-    var nameEQ = name + "=",
-        ca = document.cookie.split(';');
-
-    for(var i=0;i < ca.length;i++) {
-      var c = ca[i];
-      while (c.charAt(0)==' ') c = c.substring(1,c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-  }
-
-  function eraseCookie(name) {
-    this.createCookie(name, "", -1);
   }
 
   function generateMeta(name, content) {
@@ -200,26 +96,9 @@ window.CorporateUi = (function() {
     };
   }
 
-  function addMetaAndHeaderSpecs() {
-    generateMeta('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
-
-    document.documentElement.className += ' loading';
-    // We create this dynamically to make sure this style is always rendered before things in body
-    var style = document.createElement('style');
-    style.appendChild(document.createTextNode('\
-      @keyframes show {\
-        99% { visibility: hidden; }\
-        100% { visibility: visible; }\
-      }\
-      html.loading { height: 100%; opacity: 0; animation: 2s show; animation-fill-mode: forwards; visibility: hidden; }\
-      html.loading:before { background-color: #fff; }\
-      c-corporate-header, c-corporate-footer, c-main-navigation, c-main-content { display: none; }\
-    '));
-    document.head.insertBefore(style, document.head.firstChild);
-  }
-
   function applyBrand() {
 
+    //Should not be hardcoded here
     var brands = ['vw-group', 'audi', 'ducati', 'lamborghini', 'seat', 'volkswagen', 'bentley', 'skoda', 'bugatti', 'porsche', 'scania', 'man', 'vw-truck-bus'];
     var subDomain = window.location.hostname.split('.')[0];
     var brand = brands.indexOf( subDomain ) > -1 ? subDomain : 'scania';
@@ -283,38 +162,22 @@ window.CorporateUi = (function() {
 
   function setGlobals() {
     window.corporate_elm = document.querySelector('[src*="corporate-ui.js"]');
-
-    var scriptUrl = window.corporate_elm.src,
-        port = urlInfo(scriptUrl).port ? ':' + urlInfo(scriptUrl).port : '',
-        localhost = urlInfo(scriptUrl).hostname === 'localhost' || urlInfo(scriptUrl).hostname.match(/rd[0-9]+/g) !== null;
-
-    window.corporate_ui_params = urlInfo(scriptUrl).search.substring(1);
-    window.static_root = (localhost ? 'http://' : 'https://') + urlInfo(scriptUrl).hostname + port;
-    window.version_root = window.static_root + '/' + urlInfo(scriptUrl).pathname.replace('js/corporate-ui.js', '');
-    window.protocol = urlInfo(scriptUrl).protocol;
-    window.environment = urlInfo(scriptUrl).pathname.split('/')[1];
+    var scriptUrl = window.corporate_elm.src;
     window.params = {};
-
-    var params = decodeURI(window.corporate_ui_params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"');
+    window.corporate_ui_params = urlInfo(scriptUrl).search.substring(1);
+    var params = decodeURI(window.corporate_ui_params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"');
     if (params !== '') {
       window.params = JSON.parse('{"' + params + '"}');
     }
-
     window.less = { isFileProtocol: true }; // Is needed for making synchronous imports in less
     window.defaults = {
       appName: 'Application name',
       company: 'Scania'
     };
-    public.components = {
-      'corporate-header': window.version_root + 'html/component/Navigation/corporate-header/corporate-header.html',
-      'corporate-footer': window.version_root + 'html/component/Navigation/corporate-footer/corporate-footer.html',
-      'main-content': window.version_root + 'html/component/Content + Teasers/main-content/main-content.html',
-      'main-navigation': window.version_root + 'html/component/Navigation/main-navigation/main-navigation.html'
-    };
 
     /*window.Polymer = {
-      dom: 'shadow'
-    };*/
+     dom: 'shadow'
+     };*/
   }
 
   function polymerInject() {
@@ -376,40 +239,4 @@ window.CorporateUi = (function() {
     }
   }
 
-  function baseComponents(references) {
-    importLink(public.components['main-content'], 'import', null, window.corporate_elm);
-
-    /*if (window.params.preload === 'false') {
-      window.ready_event = undefined;
-    }*/
-
-    window.preJQuery = window.jQuery;
-
-    // Maybe we should change importLink to return a promise instead
-    var resources = (references || window.preLoadedComponents).map(function(resource) {
-      var url = public.components[resource] || resource;
-      return new Promise(function(resolve, reject) {
-        importLink(url, 'import', function(e) { resolve(e.target) }, window.corporate_elm);
-      });
-    });
-
-    window.fallback = setTimeout(done, 10000);
-
-    Promise.all(resources).then(done);
-  }
-
-  function appendExternals() {
-    window.preLoadedComponents = [
-      public.components['corporate-header'],
-      public.components['corporate-footer'],
-      public.components['main-navigation']
-    ];
-
-    // Adds support for Promise if non exist
-    if (typeof(Promise) === 'undefined') {
-      Promise = ES6Promise;
-    }
-    baseComponents(window.params.preload === 'false' ? [] : undefined);
-
-  }
 }());

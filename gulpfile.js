@@ -57,8 +57,10 @@ function _copy() {
     var stream1 = gulp.src('src/{images,js,less,starter-kit}/**')
         .pipe(gulp.dest('dist'));
     var stream2 = gulp.src('src/views/template')
+        .pipe(gulp.dest('dist/html'));
+    var stream3 = gulp.src('src/views/base-components.html')
         .pipe(gulp.dest('dist/html'))
-    return merge(stream1, stream2)
+    return merge(stream1, stream2, stream3)
 }
 function _less() {
   return gulp.src(['src/less/*.less', 'src/less/corporate-ui/{core,fonts,icons,brands}.less'])
