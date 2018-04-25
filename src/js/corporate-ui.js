@@ -152,7 +152,7 @@ window.CorporateUi = (function() {
     importLink(favicon_root + 'favicon-96x96.png', 'icon', null, window.corporate_elm, {sizes:'96x96'});
     importLink(favicon_root + 'favicon-16x16.png', 'icon', null, window.corporate_elm, {sizes:'16x16'});
 
-    importLink(favicon_root + 'manifest.json', 'manifest', null, window.corporate_elm);
+    //importLink(favicon_root + 'manifest.json', 'manifest', null, window.corporate_elm);
 
     generateMeta('msapplication-TileColor', '#000');
     generateMeta('msapplication-TileImage', favicon_root + 'ms-icon-144x144.png');
