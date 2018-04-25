@@ -8,6 +8,38 @@
 	<li>Missing out on a component? Develop it!</li>
 </ul>
 
+## Quick start
+
+Several quick start options are available:
+
+- [Download the latest release.](https://github.scania.com/Scania/corporate-ui/archive/2.4.1.zip)
+- Clone the repo: `git clone https://github.scania.com/Scania/corporate-ui.git`
+- Install with [npm](https://www.npmjs.com/): `npm install corporate-ui`
+- Install with [yarn](https://yarnpkg.com/): `yarn add corporate-ui`
+
+## CorporateUICDN
+
+Use our CDN to deliver cached version of CorporateUI's compiled CSS and JS to your project.
+
+    `
+
+        <link rel="stylesheet" href="https://static.scania.com/build/global/2.4.1/js/corporate-ui.css">
+        <script src="https://static.scania.com/build/global/2.4.1/js/corporate-ui.js"></script>
+
+    `
+Don't forget to include CDN versions of jQuery, webcomponents.js, bootstrap and polymer before it
+
+    `
+        <script src="query.min.js"></script>
+        <link rel="import" href="polymer-mini.html" >
+        <link rel="import" href="polymer.html">
+        <script src="webcomponents-lite.min.js"></script>
+        <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+    `
+
+
 <h2>The Corporate UI Development Process</h2>
 <p>There are many stakeholders that has interest in this library. Normally, new needs and improvements are filtered from business and end users via UX designers and product owners.</p>
 <ul>
