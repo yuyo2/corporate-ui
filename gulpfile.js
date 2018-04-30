@@ -11,7 +11,9 @@ var fs = require('fs'),
     data = require('gulp-data'),
     merge = require('merge-stream'),
     chalk = require('chalk'),
-    server = require('./server')
+    server = require('./server'),
+    print = require('gulp-print').default,
+    inject = require('gulp-inject');
 
 /* Available tasks */
 gulp.task('clean', _clean)
@@ -22,10 +24,11 @@ gulp.task('lessComponent', _lessComponent)
 gulp.task('tsComponent', _tsComponent)
 gulp.task('jadeComponent', _jadeComponent)
 gulp.task('fullComponent', _fullComponent)
+gulp.task('fullCorporateUIHtml', _fullCorporateUIHtml)
 gulp.task('test', _test)
 
 gulp.task('component', gulp.series(['lessComponent', 'tsComponent', 'jadeComponent', 'fullComponent'], cleanComponent))
-gulp.task('build', gulp.series('clean', ['copy', 'less', 'component'], function(done) {
+gulp.task('build', gulp.series('clean', ['copy', 'less', 'component'], 'fullCorporateUIHtml', function(done) {
     done();
 }))
 gulp.task('prepublish', gulp.series('test', 'build',  function(done) {
@@ -60,7 +63,9 @@ function _copy() {
         .pipe(gulp.dest('dist/html'));
     var stream3 = gulp.src('src/views/base-components.html')
         .pipe(gulp.dest('dist/html'))
-    return merge(stream1, stream2, stream3)
+    var stream4 = gulp.src('src/views/corporate-ui.html')
+        .pipe(gulp.dest('dist/html'))
+    return merge(stream1, stream2, stream3, stream4)
 }
 function _less() {
   return gulp.src(['src/less/*.less', 'src/less/corporate-ui/{core,fonts,icons,brands}.less'])
@@ -125,6 +130,12 @@ function _fullComponent() {
       }
     }))
     .pipe(gulp.dest('dist/html'))
+}
+
+function _fullCorporateUIHtml() {
+    return gulp.src('./dist/html/corporate-ui.html')
+        .pipe(inject(gulp.src('./dist/html/component/**/*.html', {read: false}), {relative: true}))
+        .pipe(gulp.dest('./dist/html'))
 }
 
 function _test(done) {
