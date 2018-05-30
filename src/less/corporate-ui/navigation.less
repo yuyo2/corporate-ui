@@ -2,16 +2,13 @@
 // NAVIGATION
 
 @siteNameFont: 'Scania Sans Headline';
-@headerItems:  'Scania Sans';
 
 @topLevelFont: 'Scania Sans Bold';
-@subLevelFont: 'Scania Sans';
 
 @topLevelAppFont: 'Scania Sans Semi Condensed Bold';
 @subLevelAppFont: 'Scania Sans Semi Condensed';
 
 .navbar-default {
-  font-family: @headerItems;
   background-color: #fff;
   margin-bottom: 0;
   border: 0;
@@ -159,7 +156,7 @@
       }
 
       > a {
-        color: #909090;
+        color: @text-label-color;
 
         &:hover {
           color: #041e42;
@@ -615,7 +612,6 @@
   }
 }
 .sub-level() {
-  font-family: @subLevelFont;
   background-color: #f3f3f3;
   font-size: 1.5rem;
 

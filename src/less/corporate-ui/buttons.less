@@ -5,6 +5,7 @@
 @import (reference) 'mixins';
 
 .btn {
+  cursor: pointer;
   padding: 20px 40px;
   border-radius: 0;
   font-family: "Scania Sans Bold";
@@ -14,6 +15,8 @@
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 
   > [class*=icon],
   > [class*=icon]:before {
@@ -133,11 +136,8 @@
 }
 
 // Extra buttons
-.btn-link  {
-  font-weight: normal;
+.btn-link {
   color: @btn-link-color;
-  cursor: pointer;
-  box-shadow: none;
 
   &:focus,
   &:hover,
